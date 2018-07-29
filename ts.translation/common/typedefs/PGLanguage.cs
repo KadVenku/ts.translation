@@ -1,6 +1,6 @@
 ﻿namespace ts.translation.common.typedefs
 {
-    public enum PGLanguages
+    public enum PGLanguage
     {
         ENGLISH,
         FRENCH,

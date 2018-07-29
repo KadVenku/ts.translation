@@ -5,7 +5,7 @@ using ts.translation.data.definitions.serializable;
 
 namespace ts.translation.services.reader.serializable
 {
-    internal class TranslationManifestReaderService : IReader<LocalisationData>
+    internal class TranslationManifestReader : IReader<LocalisationData>
     {
         private StreamReader _reader;
         private readonly XmlSerializer _xmlSerializer = new XmlSerializer(typeof(LocalisationData));

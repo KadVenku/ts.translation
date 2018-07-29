@@ -26,6 +26,11 @@ namespace ts.translation.data.definitions.petroglyph.formats.dat.header
             SetKeyCount(keyCount);
         }
 
+        internal PGDatHeaderHolder(int keyCount)
+        {
+            SetKeyCount((uint) keyCount);
+        }
+
         internal PGDatHeaderHolder(byte[] bytes)
         {
             SetKeyCount(BitConverter.ToUInt32(bytes, 0));

@@ -46,11 +46,11 @@ namespace ts.translation.data.definitions.petroglyph.formats.dat.index
             SetValueStringLength(0);
         }
 
-        internal PGDatIndexTableRecord(byte[] bytes, int index)
+        internal PGDatIndexTableRecord(byte[] bytes, long startingIndex)
         {
-            SetCrc32Checksum(BitConverter.ToUInt32(bytes, index));
-            SetKeyStringLength(BitConverter.ToUInt32(bytes, index + sizeof(uint)));
-            SetValueStringLength(BitConverter.ToUInt32(bytes, index + sizeof(uint) * 2));
+            SetCrc32Checksum(BitConverter.ToUInt32(bytes, Convert.ToInt32(startingIndex)));
+            SetValueStringLength(BitConverter.ToUInt32(bytes, Convert.ToInt32(startingIndex) + sizeof(uint)));
+            SetKeyStringLength(BitConverter.ToUInt32(bytes, Convert.ToInt32(startingIndex) + sizeof(uint) * 2));
         }
 
         internal PGDatIndexTableRecord(uint crc32Checksum, uint keyStringLength, uint valueStringLength)

@@ -1,7 +1,12 @@
-﻿using ts.translation.common.util;
+﻿using ts.translation.common.data;
+using ts.translation.common.util.petroglyph;
+using ts.translation.data.definitions.petroglyph.formats.dat;
 using ts.translation.data.definitions.serializable;
 using ts.translation.data.holder.text;
+using ts.translation.services.reader.binaries.dat;
 using ts.translation.services.reader.serializable;
+using ts.translation.services.writer.binaries.dat;
+using ts.translation.services.writer.serializable;
 
 namespace ts.translation.services.holder
 {
@@ -10,9 +15,9 @@ namespace ts.translation.services.holder
         internal static void LoadFromXml(string filePath)
         {
             LocalisationData data;
-            using (TranslationManifestReaderService readerService = new TranslationManifestReaderService())
+            using (TranslationManifestReader svc = new TranslationManifestReader())
             {
-                data = readerService.Read(filePath);
+                data = svc.Read(filePath);
             }
 
             if (data == null) return;
@@ -22,7 +27,46 @@ namespace ts.translation.services.holder
             }
             else
             {
-                GlobalDataHolder.TextHolder.Import(data);
+                GlobalDataHolder.TextHolder.Merge(new TextHolder(data));
+            }
+        }
+
+        internal static void LoadFromDat(string filePath)
+        {
+            LocalisationData data;
+            using (DatReader svc = new DatReader())
+            {
+                data = PGDatTypeUtility.Convert(svc.Read(filePath));
+            }
+
+            if (data == null) return;
+            if (GlobalDataHolder.TextHolder == null)
+            {
+                GlobalDataHolder.TextHolder = new TextHolder(data);
+            }
+            else
+            {
+                GlobalDataHolder.TextHolder.Merge(new TextHolder(data));
+            }
+        }
+
+        internal static void SaveToXmlFile(string filePath)
+        {
+            using (TranslationManifestWriter svc = new TranslationManifestWriter())
+            {
+                if (GlobalDataHolder.TextHolder == null) return;
+                svc.Write(filePath, GlobalDataHolder.TextHolder.ToLocalisationData());
+            }
+        }
+
+        internal static void SaveToDatFile(string filePath)
+        {
+            foreach (PGDatType datFile in GlobalDataHolder.TextHolder.GetAllDatFiles())
+            {
+                using (DatWriter writer = new DatWriter())
+                {
+                    writer.Write(filePath, datFile);
+                }
             }
         }
     }

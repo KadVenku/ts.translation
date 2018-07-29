@@ -28,10 +28,10 @@ namespace ts.translation.data.definitions.petroglyph.formats.dat.content.record.
             SetTranslation(translation);
         }
 
-        internal DatValueRecordHolder(byte[] bytes, uint index, uint stringLength)
+        internal DatValueRecordHolder(byte[] bytes, long index, long stringLength)
         {
-            byte[] tempArray = CutArray(bytes, index, index + stringLength);
-            SetTranslation(Encoding.UTF7.GetString(tempArray));
+            char[] chars = Encoding.UTF7.GetChars(bytes, Convert.ToInt32(index), Convert.ToInt32(stringLength));
+            SetTranslation(new string(chars));
         }
 
         public override byte[] ToBytes()

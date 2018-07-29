@@ -41,7 +41,7 @@ namespace ts.translation.data.definitions.petroglyph.formats.dat.content.record
             SetValue(new DatValueRecordHolder(value));
         }
 
-        internal PGDatTableRecord(byte[] bytes, uint keyIndex, uint keyLength, uint valueIndex, uint valueLength)
+        internal PGDatTableRecord(byte[] bytes, long keyIndex, long keyLength, long valueIndex, long valueLength)
         {
             SetKey(new DatKeyRecordHolder(bytes, keyIndex, keyLength));
             SetValue(new DatValueRecordHolder(bytes, valueIndex, valueLength));

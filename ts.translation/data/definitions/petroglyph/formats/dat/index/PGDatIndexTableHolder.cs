@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using ts.translation.data.definitions.petroglyph.formats.dat.header;
 
 namespace ts.translation.data.definitions.petroglyph.formats.dat.index
 {
     class PGDatIndexTableHolder : IPGBinary
     {
         private List<PGDatIndexTableRecord> _indexTable;
+        private const long STRUCT_SIZE = sizeof(uint) * 3;
+        private const long STARTING_INDEX = sizeof(uint);
 
         internal List<PGDatIndexTableRecord> GetIndexTable()
         {
@@ -27,15 +30,17 @@ namespace ts.translation.data.definitions.petroglyph.formats.dat.index
             SetIndexTable(indexTable);
         }
 
-        internal PGDatIndexTableHolder(byte[] bytes)
+        internal PGDatIndexTableHolder(byte[] bytes, PGDatHeaderHolder header)
         {
-            SetIndexTable(FromBytes(bytes));
+            SetIndexTable(FromBytes(bytes, header.GetKeyCount()));
         }
 
-        private List<PGDatIndexTableRecord> FromBytes(byte[] bytes)
+        private List<PGDatIndexTableRecord> FromBytes(byte[] bytes, uint keyCount)
         {
             List<PGDatIndexTableRecord> indexTable = new List<PGDatIndexTableRecord>();
-            for (int i = 0; i < bytes.Length; i += 3 * sizeof(UInt32))
+            long lKeyCount = keyCount;
+            long endIndex = STARTING_INDEX + lKeyCount * STRUCT_SIZE;
+            for (long i = sizeof(uint); i < endIndex; i += STRUCT_SIZE)
             {
                 indexTable.Add(new PGDatIndexTableRecord(bytes, i));
             }
@@ -50,6 +55,11 @@ namespace ts.translation.data.definitions.petroglyph.formats.dat.index
                 indexTable.AddRange(indexTableRecord.ToBytes());
             }
             return indexTable.ToArray();
+        }
+
+        public long GetStructSize()
+        {
+            return STRUCT_SIZE;
         }
     }
 }

@@ -23,10 +23,10 @@ namespace ts.translation.data.definitions.petroglyph.formats.dat.content.record.
             SetStringKey(stringKey);
         }
 
-        internal DatKeyRecordHolder(byte[] bytes, uint index, uint keyLength)
+        internal DatKeyRecordHolder(byte[] bytes, long index, long keyLength)
         {
-            byte[] tempArray = CutArray(bytes, index, index + keyLength);
-            SetStringKey(Encoding.ASCII.GetString(tempArray));
+            char[] chars = Encoding.ASCII.GetChars(bytes, Convert.ToInt32(index), Convert.ToInt32(keyLength));
+            SetStringKey(new string(chars));
         }
 
         public override byte[] ToBytes()

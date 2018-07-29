@@ -2,7 +2,7 @@
 
 namespace ts.translation.services.reader
 {
-    internal interface IReader<T> : IDisposable
+    internal interface IReader<out T> : IDisposable
     {
         T Read (string path);
     }

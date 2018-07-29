@@ -60,6 +60,13 @@ namespace ts.translation.data.definitions.petroglyph.formats.dat
             SetDataTable(datTableHolder);
         }
 
+        public PGDatType(byte[] byteStream)
+        {
+            SetHeader(new PGDatHeaderHolder(byteStream));
+            SetIndexTable(new PGDatIndexTableHolder(byteStream, GetHeader()));
+            SetDataTable(new PGDatTableHolder(byteStream, GetHeader(), GetIndexTable()));
+        }
+
         public byte[] ToBytes()
         {
             List<byte> datFileBytes = new List<byte>();
