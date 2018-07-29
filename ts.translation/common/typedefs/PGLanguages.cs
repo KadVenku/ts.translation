@@ -2,10 +2,10 @@
 {
     public enum PGLanguages
     {
-        English,
-        French,
-        Italian,
-        German,
-        Spanish
+        ENGLISH,
+        FRENCH,
+        ITALIAN,
+        GERMAN,
+        SPANISH
     }
 }

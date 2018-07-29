@@ -5,7 +5,7 @@ namespace ts.translation.data.definitions.petroglyph.pgchecksum
     internal class PGCheckSum32
     {
         private static readonly ulong[] LOOKUP_TABLE = new ulong[256];
-        private static bool _tableInitialised = false;
+        private static bool _tableInitialised;
 
         private static void InitTable()
         {
@@ -21,7 +21,7 @@ namespace ts.translation.data.definitions.petroglyph.pgchecksum
             _tableInitialised = true;
         }
 
-        internal uint Checksum { get; set; }
+        internal uint Checksum { get; }
         public PGCheckSum32(uint newCrc32)
         {
             Checksum = newCrc32;
@@ -31,7 +31,7 @@ namespace ts.translation.data.definitions.petroglyph.pgchecksum
             Checksum = ComputeCrc32(inputVal);
         }
 
-        internal static uint ComputeCrc32(string inputVal)
+        private static uint ComputeCrc32(string inputVal)
         {
             if (!_tableInitialised)
             {

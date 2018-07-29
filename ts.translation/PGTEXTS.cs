@@ -1,4 +1,8 @@
-﻿using ts.translation.common.typedefs;
+﻿using System;
+using ts.translation.common.typedefs;
+using ts.translation.common.util;
+using ts.translation.data.holder.text;
+using ts.translation.services.holder;
 
 namespace ts.translation
 {
@@ -74,7 +78,21 @@ namespace ts.translation
         /// <param name="fileType">Type of the file.</param>
         public static void LoadFromFile(string filePath, TSFileTypes fileType)
         {
+            switch (fileType)
+            {
+                case TSFileTypes.FileTypeXml:
+                    LoadFromXmlFile(filePath);
+                    break;
+                case TSFileTypes.FileTypeDat:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(fileType), fileType, null);
+            }
+        }
 
+        private static void LoadFromXmlFile(string filePath)
+        {
+            TextHolderProcessService.LoadFromXml(filePath);
         }
 
         /// <summary>
