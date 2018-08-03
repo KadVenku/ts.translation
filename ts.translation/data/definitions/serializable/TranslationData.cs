@@ -6,7 +6,7 @@ namespace ts.translation.data.definitions.serializable
     [XmlRoot(ElementName = "TranslationData")]
     public class TranslationData
     {
-        [XmlElement(ElementName = "TranslationHolder")]
+        [XmlElement(ElementName = "Translation")]
         public List<Translation> TranslationHolder { get; set; }
 
         public TranslationData()

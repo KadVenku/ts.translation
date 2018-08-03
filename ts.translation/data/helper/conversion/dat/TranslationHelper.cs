@@ -2,13 +2,13 @@
 
 namespace ts.translation.data.helper.conversion.dat
 {
-    class TranslationHelper : IComparable
+    public class TranslationHelper : IComparable
     {
-        internal string Key { get; }
-        internal uint Crc32 { get; }
-        internal string Value { get; }
+        public string Key { get; }
+        public uint Crc32 { get; }
+        public string Value { get; }
 
-        internal TranslationHelper(string key, uint crc32, string value)
+        public TranslationHelper(string key, uint crc32, string value)
         {
             Key = key.Replace("\0", string.Empty);
             Crc32 = crc32;

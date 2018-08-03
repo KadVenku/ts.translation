@@ -5,4 +5,8 @@
     <Platforms>AnyCPU;x64;x86</Platforms>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>bin\Release\netstandard2.0\ts.translation.xml</DocumentationFile>
+  </PropertyGroup>
+
 </Project>

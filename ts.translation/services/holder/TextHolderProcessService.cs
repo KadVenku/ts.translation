@@ -63,6 +63,10 @@ namespace ts.translation.services.holder
         {
             foreach (PGDatType datFile in GlobalDataHolder.TextHolder.GetAllDatFiles())
             {
+                if (datFile.GetHeader().GetKeyCount() < 1)
+                {
+                    continue;
+                }
                 using (DatWriter writer = new DatWriter())
                 {
                     writer.Write(filePath, datFile);

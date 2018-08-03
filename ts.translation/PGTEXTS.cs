@@ -1,11 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 using ts.translation.common.data;
 using ts.translation.common.exceptions;
 using ts.translation.common.typedefs;
+using ts.translation.common.util.ts;
 using ts.translation.services.holder;
 
 namespace ts.translation
 {
+    /// <summary>
+    /// Static Text Provider for Petroglyph *.DAT files.
+    /// </summary>
     public static class PGTEXTS
     {
         /// <summary>
@@ -85,6 +90,16 @@ namespace ts.translation
                 default:
                     throw new ArgumentOutOfRangeException(nameof(fileType), fileType, null);
             }
+        }
+
+        public static IEnumerable<PGLanguage> GetLoadedLanguages()
+        {
+            return GlobalDataHolder.TextHolder?.GetLoadedLanguages();
+        }
+
+        public static IEnumerable<PGLanguage> GetAvailableLanguages()
+        {
+            return EnumUtility<PGLanguage>.GetValues();
         }
     }
 }
