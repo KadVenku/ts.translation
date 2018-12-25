@@ -22,7 +22,7 @@ namespace ts.translation.services.writer.serializable
                         path = FilePathUtility.GetTranlsationManifestFileName(path);
                         XmlSerializer serializer = new XmlSerializer(typeof(LocalisationData));
                         serializer.Serialize(xmlWriter, GlobalDataHolder.TextHolder.ToLocalisationData());
-                        File.WriteAllText(path, XDocument.Parse(stringWriter.ToString()).ToString());
+                        File.WriteAllText(path, $"<?xml version=\"1.0\"?>\n{XDocument.Parse(stringWriter.ToString())}");
                     }
                 }
             }
