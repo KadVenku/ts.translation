@@ -13,8 +13,13 @@ namespace ts.translation.data.definitions.serializable
         private string _text;
         [XmlAttribute(AttributeName = "Language")]
         public string Language { get; set; }
+
         [XmlIgnore]
-        public string Text { get => _text; set => _text = StringUtility.Validate(value); }
+        public string Text
+        {
+            get => _text;
+            set => _text = StringUtility.Validate(value);
+        }
         [XmlText]
         public XmlNode[] CDataContent
         {
