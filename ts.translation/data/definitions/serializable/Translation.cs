@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Security;
 using System.Xml;
 using System.Xml.Serialization;
+using ts.translation.common.util.generic;
 
 namespace ts.translation.data.definitions.serializable
 {
@@ -8,17 +10,18 @@ namespace ts.translation.data.definitions.serializable
     [XmlRoot(ElementName = "TranslationHolder")]
     public class Translation
     {
+        private string _text;
         [XmlAttribute(AttributeName = "Language")]
         public string Language { get; set; }
         [XmlIgnore]
-        public string Text { get; set; }
+        public string Text { get => _text; set => _text = StringUtility.Validate(value); }
         [XmlText]
         public XmlNode[] CDataContent
         {
             get
             {
                 XmlDocument dummy = new XmlDocument();
-                return new XmlNode[] { dummy.CreateCDataSection(Text) };
+                return new XmlNode[] { dummy.CreateCDataSection(XmlUtility.EscapeXml(Text)) };
             }
             set
             {
@@ -32,8 +35,8 @@ namespace ts.translation.data.definitions.serializable
                 {
                     throw new InvalidOperationException($"Invalid array length {value.Length}");
                 }
-
-                Text = value[0].Value;
+                SecurityElement s = new SecurityElement("a", value[0].Value);
+                Text = XmlUtility.UnescapeXml(s.Text);
             }
         }
     }

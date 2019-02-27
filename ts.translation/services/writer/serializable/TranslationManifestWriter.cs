@@ -3,7 +3,6 @@ using System.Text;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
-using ts.translation.common.data;
 using ts.translation.common.util.ts;
 using ts.translation.data.definitions.serializable;
 
@@ -21,7 +20,7 @@ namespace ts.translation.services.writer.serializable
                     {
                         path = FilePathUtility.GetTranlsationManifestFileName(path);
                         XmlSerializer serializer = new XmlSerializer(typeof(LocalisationData));
-                        serializer.Serialize(xmlWriter, GlobalDataHolder.TextHolder.ToLocalisationData());
+                        serializer.Serialize(xmlWriter, writable);
                         File.WriteAllText(path, $"<?xml version=\"1.0\"?>\n{XDocument.Parse(stringWriter.ToString())}");
                     }
                 }
