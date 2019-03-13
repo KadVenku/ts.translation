@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Text.RegularExpressions;
 using ts.translation.common.typedefs;
 using ts.translation.common.util.generic;
 using ts.translation.common.util.petroglyph;
@@ -109,6 +110,7 @@ namespace ts.translation.data.holder.text
                         else
                         {
                             _dataDictionary[keyValuePair.Key].Add(translation.Key, translation.Value);
+                            AddLoadedLanguage(translation.Key);
                         }
                     }
                 }
@@ -220,8 +222,40 @@ namespace ts.translation.data.holder.text
                 if (keyValuePair.Value[lang] == null) continue;
                 returnList.Add(new ObservableTranslationData(keyValuePair.Key, keyValuePair.Value[lang].Text));
             }
-
             return returnList;
+        }
+
+        public void PerformTranslationFixup(PGLanguage masterLanguage = PGLanguage.ENGLISH)
+        {
+            if (_dataDictionary == null)
+            {
+                return;
+            }
+            foreach (KeyValuePair<string, Dictionary<PGLanguage, Translation>> keyValuePair in _dataDictionary)
+            {
+                foreach (PGLanguage loadedLanguage in _loadedLanguages)
+                {
+                    if (keyValuePair.Value.ContainsKey(loadedLanguage))
+                    {
+                        if (keyValuePair.Value[loadedLanguage] != null)
+                        {
+                            if (!string.IsNullOrEmpty(keyValuePair.Value[loadedLanguage].Text)) continue;
+                            string txt = new Regex("^(.*)(NONE)(.*)$", RegexOptions.CultureInvariant).Match(keyValuePair.Key).Success ? " " : $"TODO: {keyValuePair.Value[masterLanguage].Text}";
+                            keyValuePair.Value[loadedLanguage].Text = txt;
+                        }
+                        else
+                        {
+                            Translation t = new Translation() { Language = loadedLanguage.ToString(), Text = $"TODO: {keyValuePair.Value[masterLanguage].Text}" };
+                            keyValuePair.Value[loadedLanguage] = t;
+                        }
+                    }
+                    else
+                    {
+                        Translation t = new Translation() {Language = loadedLanguage.ToString(), Text = $"TODO: {keyValuePair.Value[masterLanguage].Text}"};
+                        keyValuePair.Value.Add(loadedLanguage, t);
+                    }
+                }
+            }
         }
     }
 }

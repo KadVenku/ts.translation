@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using ts.translation.common.data;
 using ts.translation.common.exceptions;
 using ts.translation.common.typedefs;
 using ts.translation.common.util.ts;
+using ts.translation.data.holder.observables;
 using ts.translation.services.holder;
 
 namespace ts.translation
@@ -92,11 +94,27 @@ namespace ts.translation
             }
         }
 
+        /// <summary>
+        ///   <para>
+        ///  Performs a translation fixup.
+        /// </para>
+        ///   <para>This will add "TODO: &lt;text from the master language&gt;" placeholder translations for all languages that currently do not have a translation for the given key.</para>
+        /// </summary>
+        /// <param name="masterLanguage">The master language.</param>
+        public static void PerformTranslationFixup(PGLanguage masterLanguage = PGLanguage.ENGLISH)
+        {
+            GlobalDataHolder.TextHolder?.PerformTranslationFixup(masterLanguage);
+        }
+
+        /// <summary>Gets the loaded languages.</summary>
+        /// <returns>Returns a list of all languages that are currently loaded.</returns>
         public static IEnumerable<PGLanguage> GetLoadedLanguages()
         {
             return GlobalDataHolder.TextHolder?.GetLoadedLanguages();
         }
 
+        /// <summary>Gets the available languages.</summary>
+        /// <returns>Returns a list of all allowed Petroglyph languages.</returns>
         public static IEnumerable<PGLanguage> GetAvailableLanguages()
         {
             return EnumUtility<PGLanguage>.GetValues();
