@@ -58,12 +58,12 @@ namespace ts.translation
         /// <param name="filePath">The file path.</param>
         /// <param name="fileType">Type of the file.</param>
         /// <exception cref="ArgumentOutOfRangeException">fileType - null</exception>
-        public static void LoadFromFile(string filePath, TSFileTypes fileType = TSFileTypes.FileTypeXml)
+        public static void LoadFromFile(string filePath, TSFileTypes fileType = TSFileTypes.FileTypeXmlv1)
         {
             switch (fileType)
             {
-                case TSFileTypes.FileTypeXml:
-                    TextHolderProcessService.LoadFromXml(filePath);
+                case TSFileTypes.FileTypeXmlv1:
+                    TextHolderProcessService.LoadFromXmlFileV1(filePath);
                     break;
                 case TSFileTypes.FileTypeDat:
                     TextHolderProcessService.LoadFromDat(filePath);
@@ -79,12 +79,12 @@ namespace ts.translation
         /// </summary>
         /// <param name="filePath">The file path: Path to the directory to save the file to. The file name is auto-generated.</param>
         /// <param name="fileType">Type of the file.</param>
-        public static void SaveToFile(string filePath, TSFileTypes fileType = TSFileTypes.FileTypeXml)
+        public static void SaveToFile(string filePath, TSFileTypes fileType = TSFileTypes.FileTypeXmlv1)
         {
             switch (fileType)
             {
-                case TSFileTypes.FileTypeXml:
-                    TextHolderProcessService.SaveToXmlFile(filePath);
+                case TSFileTypes.FileTypeXmlv1:
+                    TextHolderProcessService.SaveToXmlFileV1(filePath);
                     break;
                 case TSFileTypes.FileTypeDat:
                     TextHolderProcessService.SaveToDatFile(filePath);

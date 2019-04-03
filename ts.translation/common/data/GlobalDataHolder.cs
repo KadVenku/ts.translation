@@ -1,4 +1,4 @@
-﻿using ts.translation.data.definitions.serializable;
+﻿using ts.translation.data.definitions.serializable.v1;
 using ts.translation.data.holder.text;
 
 namespace ts.translation.common.data

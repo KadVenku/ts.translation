@@ -4,7 +4,7 @@ using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 using ts.translation.common.util.ts;
-using ts.translation.data.definitions.serializable;
+using ts.translation.data.definitions.serializable.v1;
 
 namespace ts.translation.services.writer.serializable
 {

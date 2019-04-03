@@ -2,7 +2,7 @@
 {
     public enum TSFileTypes
     {
-        FileTypeXml,
+        FileTypeXmlv1,
         FileTypeDat
     }
 }

@@ -1,11 +1,11 @@
 ﻿using System.IO;
 using System.Xml.Serialization;
 using ts.translation.common.exceptions;
-using ts.translation.data.definitions.serializable;
+using ts.translation.data.definitions.serializable.v1;
 
 namespace ts.translation.services.reader.serializable
 {
-    internal class TranslationManifestReader : IReader<LocalisationData>
+    internal class TranslationManifestReaderV1 : IReader<LocalisationData>
     {
         private StreamReader _reader;
         private readonly XmlSerializer _xmlSerializer = new XmlSerializer(typeof(LocalisationData));

@@ -4,7 +4,7 @@ using System.Xml;
 using System.Xml.Serialization;
 using ts.translation.common.util.generic;
 
-namespace ts.translation.data.definitions.serializable
+namespace ts.translation.data.definitions.serializable.v1
 {
 
     [XmlRoot(ElementName = "TranslationHolder")]

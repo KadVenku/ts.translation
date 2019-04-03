@@ -5,7 +5,7 @@ using ts.translation.data.definitions.petroglyph.formats.dat.content;
 using ts.translation.data.definitions.petroglyph.formats.dat.content.record;
 using ts.translation.data.definitions.petroglyph.formats.dat.header;
 using ts.translation.data.definitions.petroglyph.formats.dat.index;
-using ts.translation.data.definitions.serializable;
+using ts.translation.data.definitions.serializable.v1;
 using ts.translation.data.helper.conversion.dat;
 
 namespace ts.translation.common.util.petroglyph

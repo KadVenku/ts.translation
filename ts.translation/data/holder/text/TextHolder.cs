@@ -7,7 +7,7 @@ using ts.translation.common.util.generic;
 using ts.translation.common.util.petroglyph;
 using ts.translation.common.util.ts;
 using ts.translation.data.definitions.petroglyph.formats.dat;
-using ts.translation.data.definitions.serializable;
+using ts.translation.data.definitions.serializable.v1;
 using ts.translation.data.helper.conversion.dat;
 using ts.translation.data.holder.observables;
 
