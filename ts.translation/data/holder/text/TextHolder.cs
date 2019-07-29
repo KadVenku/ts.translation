@@ -119,7 +119,6 @@ namespace ts.translation.data.holder.text
                     _dataDictionary.Add(keyValuePair.Key, keyValuePair.Value);
                 }
             }
-
         }
 
         internal LocalisationData ToLocalisationData()
@@ -128,7 +127,7 @@ namespace ts.translation.data.holder.text
 
             foreach (KeyValuePair<string, Dictionary<PGLanguage, Translation>> keyValuePair in _dataDictionary)
             {
-                Localisation localisation = new Localisation {Key = keyValuePair.Key};
+                Localisation localisation = new Localisation { Key = keyValuePair.Key };
                 foreach (KeyValuePair<PGLanguage, Translation> translation in keyValuePair.Value)
                 {
                     localisation.TranslationData.TranslationHolder.Add(translation.Value);
@@ -142,10 +141,26 @@ namespace ts.translation.data.holder.text
         internal string GetText(string textKey, PGLanguage language = PGLanguage.ENGLISH)
         {
             string retString = $"MISSING: {textKey}";
-            if (!_dataDictionary.ContainsKey(textKey)) return retString;
-            if (_dataDictionary[textKey] == null) return retString;
-            if (!_dataDictionary[textKey].ContainsKey(language)) return retString;
-            if (_dataDictionary[textKey][language] == null) return retString;
+            if (!_dataDictionary.ContainsKey(textKey))
+            {
+                return retString;
+            }
+
+            if (_dataDictionary[textKey] == null)
+            {
+                return retString;
+            }
+
+            if (!_dataDictionary[textKey].ContainsKey(language))
+            {
+                return retString;
+            }
+
+            if (_dataDictionary[textKey][language] == null)
+            {
+                return retString;
+            }
+
             retString = _dataDictionary[textKey][language].Text;
             return retString;
         }
@@ -157,11 +172,9 @@ namespace ts.translation.data.holder.text
             {
                 UpdateText(textKey, newText, language);
             }
-            Translation translation = new Translation {Language = PGLanguageUtility.ToString(language), Text = newText};
+            Translation translation = new Translation { Language = PGLanguageUtility.ToString(language), Text = newText };
             AddLoadedLanguage(PGLanguageUtility.ToPGLanguage(translation.Language));
-            _dataDictionary.Add(textKey, new Dictionary<PGLanguage, Translation> {{language, translation}});
-
-
+            _dataDictionary.Add(textKey, new Dictionary<PGLanguage, Translation> { { language, translation } });
         }
 
         internal void UpdateText(string textKey, string newText, PGLanguage language = PGLanguage.ENGLISH)
@@ -175,13 +188,13 @@ namespace ts.translation.data.holder.text
 
             if (_dataDictionary[textKey] == null)
             {
-                _dataDictionary[textKey] = new Dictionary<PGLanguage, Translation> {{language, new Translation {Language = PGLanguageUtility.ToString(language), Text = newText}}};
+                _dataDictionary[textKey] = new Dictionary<PGLanguage, Translation> { { language, new Translation { Language = PGLanguageUtility.ToString(language), Text = newText } } };
                 return;
             }
 
             if (_dataDictionary[textKey].ContainsKey(language))
             {
-                _dataDictionary[textKey][language] = new Translation {Language = PGLanguageUtility.ToString(language), Text = newText};
+                _dataDictionary[textKey][language] = new Translation { Language = PGLanguageUtility.ToString(language), Text = newText };
             }
             else
             {
@@ -194,7 +207,11 @@ namespace ts.translation.data.holder.text
             List<TranslationHelper> tempExportTable = new List<TranslationHelper>();
             foreach (KeyValuePair<string, Dictionary<PGLanguage, Translation>> keyValuePair in _dataDictionary)
             {
-                if (keyValuePair.Value == null || !keyValuePair.Value.ContainsKey(language) || keyValuePair.Value[language] == null) continue;
+                if (keyValuePair.Value == null || !keyValuePair.Value.ContainsKey(language) || keyValuePair.Value[language] == null)
+                {
+                    continue;
+                }
+
                 TranslationHelper hlp = new TranslationHelper(keyValuePair.Key, Crc32Utility.Crc32(keyValuePair.Key), keyValuePair.Value[language].Text);
                 tempExportTable.Add(hlp);
             }
@@ -217,9 +234,21 @@ namespace ts.translation.data.holder.text
             ObservableCollection<ObservableTranslationData> returnList = new ObservableCollection<ObservableTranslationData>();
             foreach (KeyValuePair<string, Dictionary<PGLanguage, Translation>> keyValuePair in _dataDictionary)
             {
-                if (keyValuePair.Value == null) continue;
-                if (!keyValuePair.Value.ContainsKey(lang)) continue;
-                if (keyValuePair.Value[lang] == null) continue;
+                if (keyValuePair.Value == null)
+                {
+                    continue;
+                }
+
+                if (!keyValuePair.Value.ContainsKey(lang))
+                {
+                    continue;
+                }
+
+                if (keyValuePair.Value[lang] == null)
+                {
+                    continue;
+                }
+
                 returnList.Add(new ObservableTranslationData(keyValuePair.Key, keyValuePair.Value[lang].Text));
             }
             return returnList;
@@ -239,7 +268,11 @@ namespace ts.translation.data.holder.text
                     {
                         if (keyValuePair.Value[loadedLanguage] != null)
                         {
-                            if (!string.IsNullOrEmpty(keyValuePair.Value[loadedLanguage].Text)) continue;
+                            if (!string.IsNullOrEmpty(keyValuePair.Value[loadedLanguage].Text))
+                            {
+                                continue;
+                            }
+
                             string txt = new Regex("^(.*)(NONE)(.*)$", RegexOptions.CultureInvariant).Match(keyValuePair.Key).Success ? " " : $"TODO: {keyValuePair.Value[masterLanguage].Text}";
                             keyValuePair.Value[loadedLanguage].Text = txt;
                         }
@@ -251,11 +284,16 @@ namespace ts.translation.data.holder.text
                     }
                     else
                     {
-                        Translation t = new Translation() {Language = loadedLanguage.ToString(), Text = $"TODO: {keyValuePair.Value[masterLanguage].Text}"};
+                        Translation t = new Translation() { Language = loadedLanguage.ToString(), Text = $"TODO: {keyValuePair.Value[masterLanguage].Text}" };
                         keyValuePair.Value.Add(loadedLanguage, t);
                     }
                 }
             }
+        }
+
+        internal bool HasText(string key)
+        {
+            return _dataDictionary.ContainsKey(key);
         }
     }
 }

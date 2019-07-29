@@ -14,7 +14,7 @@ namespace ts.translation.common.util.ts
         {
             mergeTarget.Merge(dataToMerge);
         }
-        
+
         internal static void Merge(LocalisationData mergeTarget, LocalisationData dataToMerge)
         {
             TextHolder textHolderMergeTarget = new TextHolder(mergeTarget);

@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 
 namespace ts.translation.common.exceptions
 {
-    class TranslationObjectCountOutOfBoundsException : Exception
+    internal class TranslationObjectCountOutOfBoundsException : Exception
     {
         public TranslationObjectCountOutOfBoundsException()
         {

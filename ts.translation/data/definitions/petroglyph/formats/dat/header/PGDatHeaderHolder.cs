@@ -2,7 +2,7 @@
 
 namespace ts.translation.data.definitions.petroglyph.formats.dat.header
 {
-    class PGDatHeaderHolder : IPGBinary
+    internal class PGDatHeaderHolder : IPGBinary
     {
         private uint _keyCount;
 
@@ -28,7 +28,7 @@ namespace ts.translation.data.definitions.petroglyph.formats.dat.header
 
         internal PGDatHeaderHolder(int keyCount)
         {
-            SetKeyCount((uint) keyCount);
+            SetKeyCount((uint)keyCount);
         }
 
         internal PGDatHeaderHolder(byte[] bytes)

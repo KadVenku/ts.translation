@@ -5,7 +5,7 @@ using ts.translation.data.definitions.petroglyph.formats.dat.index;
 
 namespace ts.translation.data.definitions.petroglyph.formats.dat.content
 {
-    class PGDatTableHolder : IPGBinary
+    internal class PGDatTableHolder : IPGBinary
     {
         private List<PGDatTableRecord> _dataTable = new List<PGDatTableRecord>();
         private const long STRUCT_SIZE = sizeof(char);

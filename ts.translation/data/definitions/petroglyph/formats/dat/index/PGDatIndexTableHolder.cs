@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using ts.translation.data.definitions.petroglyph.formats.dat.header;
 
 namespace ts.translation.data.definitions.petroglyph.formats.dat.index
 {
-    class PGDatIndexTableHolder : IPGBinary
+    internal class PGDatIndexTableHolder : IPGBinary
     {
         private List<PGDatIndexTableRecord> _indexTable;
         private const long STRUCT_SIZE = sizeof(uint) * 3;

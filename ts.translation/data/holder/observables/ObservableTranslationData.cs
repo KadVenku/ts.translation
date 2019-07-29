@@ -11,11 +11,16 @@ namespace ts.translation.data.holder.observables
         private string _value;
         private readonly string _initialValue;
 
-        public string Key {
+        public string Key
+        {
             get => _key;
             set
             {
-                if (_key.Equals(value)) return;
+                if (_key.Equals(value))
+                {
+                    return;
+                }
+
                 _key = value;
                 OnPropertyChanged(nameof(Key));
             }
@@ -40,12 +45,17 @@ namespace ts.translation.data.holder.observables
             get => _value;
             set
             {
-                if (_value.Equals(value)) return;
+                if (_value.Equals(value))
+                {
+                    return;
+                }
+
                 _value = value;
                 HasChanged = !new Regex("^(" + _initialValue + ")$", RegexOptions.CultureInvariant).Match(value).Success;
                 OnPropertyChanged(nameof(Value));
             }
         }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         public ObservableTranslationData(string key, string value, bool isNewTranslation = false)

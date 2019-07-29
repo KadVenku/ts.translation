@@ -11,6 +11,7 @@ namespace ts.translation.common.util.observable
         {
             return GlobalDataHolder.TextHolder.ToObservableCollection(lang);
         }
+
         public static void InitTranslationDataAsObservable(ObservableCollection<ObservableTranslationData> dataToUpdate, PGLanguage lang = PGLanguage.ENGLISH)
         {
             ObservableCollection<ObservableTranslationData> newData = GetTranslationDataAsObservable(lang);

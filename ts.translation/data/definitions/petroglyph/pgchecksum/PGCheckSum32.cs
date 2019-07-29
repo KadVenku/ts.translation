@@ -22,10 +22,12 @@ namespace ts.translation.data.definitions.petroglyph.pgchecksum
         }
 
         internal uint Checksum { get; }
+
         public PGCheckSum32(uint newCrc32)
         {
             Checksum = newCrc32;
         }
+
         public PGCheckSum32(string inputVal)
         {
             Checksum = ComputeCrc32(inputVal);

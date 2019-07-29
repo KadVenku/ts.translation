@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 
 namespace ts.translation.common.exceptions
 {
-    class TextHolderNotInitilaisedException : Exception
+    internal class TextHolderNotInitilaisedException : Exception
     {
         public TextHolderNotInitilaisedException()
         {

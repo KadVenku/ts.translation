@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 
 namespace ts.translation.common.exceptions
 {
-    class TranslationManifestMalformedException : Exception
+    internal class TranslationManifestMalformedException : Exception
     {
         public TranslationManifestMalformedException()
         {

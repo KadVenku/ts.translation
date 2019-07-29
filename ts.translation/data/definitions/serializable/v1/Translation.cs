@@ -6,11 +6,11 @@ using ts.translation.common.util.generic;
 
 namespace ts.translation.data.definitions.serializable.v1
 {
-
     [XmlRoot(ElementName = "TranslationHolder")]
     public class Translation
     {
         private string _text;
+
         [XmlAttribute(AttributeName = "Language")]
         public string Language { get; set; }
 
@@ -20,6 +20,7 @@ namespace ts.translation.data.definitions.serializable.v1
             get => _text;
             set => _text = StringUtility.Validate(value);
         }
+
         [XmlText]
         public XmlNode[] CDataContent
         {

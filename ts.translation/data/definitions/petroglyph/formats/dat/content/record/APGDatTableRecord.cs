@@ -2,7 +2,7 @@
 
 namespace ts.translation.data.definitions.petroglyph.formats.dat.content.record
 {
-    abstract class APGDatTableRecordHolder : IPGBinary
+    internal abstract class APGDatTableRecordHolder : IPGBinary
     {
         protected static byte[] CutArray(byte[] array, uint startingIndex, uint endIndex)
         {

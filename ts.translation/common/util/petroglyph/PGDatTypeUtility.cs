@@ -19,7 +19,7 @@ namespace ts.translation.common.util.petroglyph
             PGDatTableHolder datTableHolder = new PGDatTableHolder();
             foreach (TranslationHelper translationHelper in translationHelperTable)
             {
-                indexTableHolder.GetIndexTable().Add(new PGDatIndexTableRecord(translationHelper.Crc32, (uint) translationHelper.Key.Length, (uint) translationHelper.Value.Length));
+                indexTableHolder.GetIndexTable().Add(new PGDatIndexTableRecord(translationHelper.Crc32, (uint)translationHelper.Key.Length, (uint)translationHelper.Value.Length));
                 datTableHolder.GetDataTable().Add(new PGDatTableRecord(translationHelper.Key, translationHelper.Value));
             }
             return new PGDatType(PGLanguageUtility.ToString(language), headerHolder, indexTableHolder, datTableHolder);
@@ -30,8 +30,8 @@ namespace ts.translation.common.util.petroglyph
             LocalisationData data = new LocalisationData();
             foreach (PGDatTableRecord record in datType.GetDataTable().GetDataTable())
             {
-                Translation trans = new Translation {Language = datType.GetLanguage(), Text = record.GetValue().GetTranslation()};
-                Localisation loc = new Localisation {Key = record.GetKey().GetStringKey(), TranslationData = new TranslationData()};
+                Translation trans = new Translation { Language = datType.GetLanguage(), Text = record.GetValue().GetTranslation() };
+                Localisation loc = new Localisation { Key = record.GetKey().GetStringKey(), TranslationData = new TranslationData() };
                 loc.TranslationData.TranslationHolder.Add(trans);
                 data.LocalisationHolder.Add(loc);
             }

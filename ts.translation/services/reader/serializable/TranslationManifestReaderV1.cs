@@ -9,10 +9,15 @@ namespace ts.translation.services.reader.serializable
     {
         private StreamReader _reader;
         private readonly XmlSerializer _xmlSerializer = new XmlSerializer(typeof(LocalisationData));
+
         public LocalisationData Read(string path)
         {
             _reader = new StreamReader(path);
-            if (!(_xmlSerializer.Deserialize(_reader) is LocalisationData localisationData)) throw new TranslationManifestMalformedException();
+            if (!(_xmlSerializer.Deserialize(_reader) is LocalisationData localisationData))
+            {
+                throw new TranslationManifestMalformedException();
+            }
+
             return localisationData;
         }
 

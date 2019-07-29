@@ -7,12 +7,20 @@ using ts.translation.data.definitions.petroglyph.formats.dat;
 
 namespace ts.translation.services.reader.binaries.dat
 {
-    class DatReader : IReader<PGDatType>
+    internal class DatReader : IReader<PGDatType>
     {
         public PGDatType Read(string path)
         {
-            if(path == null) throw new ArgumentNullException(nameof(path));
-            if(!FilePathUtility.FileExists(path)) throw new ArgumentException($"File {path} doesn't exist.");
+            if (path == null)
+            {
+                throw new ArgumentNullException(nameof(path));
+            }
+
+            if (!FilePathUtility.FileExists(path))
+            {
+                throw new ArgumentException($"File {path} doesn't exist.");
+            }
+
             PGLanguage lang = PGLanguageUtility.GetLanguageFromFileName(FilePathUtility.GetFileName(path));
             byte[] byteStream = File.ReadAllBytes(path);
             PGDatType datType = new PGDatType(byteStream);

@@ -8,7 +8,11 @@ namespace ts.translation.common.util.generic
         {
             StringBuilder stringBuilder = new StringBuilder();
 
-            if (string.IsNullOrEmpty(s)) return string.Empty;
+            if (string.IsNullOrEmpty(s))
+            {
+                return string.Empty;
+            }
+
             foreach (char t in s)
             {
                 char current = t;

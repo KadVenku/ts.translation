@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using ts.translation.common.data;
 using ts.translation.common.exceptions;
 using ts.translation.common.typedefs;
 using ts.translation.common.util.ts;
-using ts.translation.data.holder.observables;
 using ts.translation.services.holder;
 
 namespace ts.translation
@@ -24,7 +22,11 @@ namespace ts.translation
         /// <exception cref="TextHolderNotInitilaisedException"></exception>
         public static void SetText(string textKey, string newText, PGLanguage language = PGLanguage.ENGLISH)
         {
-            if (GlobalDataHolder.TextHolder == null) throw new TextHolderNotInitilaisedException();
+            if (GlobalDataHolder.TextHolder == null)
+            {
+                throw new TextHolderNotInitilaisedException();
+            }
+
             GlobalDataHolder.TextHolder.UpdateText(textKey, newText, language);
         }
 
@@ -37,7 +39,11 @@ namespace ts.translation
         /// <exception cref="TextHolderNotInitilaisedException"></exception>
         public static void AddText(string textKey, string newText, PGLanguage language = PGLanguage.ENGLISH)
         {
-            if (GlobalDataHolder.TextHolder == null) throw new TextHolderNotInitilaisedException();
+            if (GlobalDataHolder.TextHolder == null)
+            {
+                throw new TextHolderNotInitilaisedException();
+            }
+
             GlobalDataHolder.TextHolder.AddText(textKey, newText, language);
         }
 
@@ -65,14 +71,15 @@ namespace ts.translation
                 case TSFileTypes.FileTypeXmlv1:
                     TextHolderProcessService.LoadFromXmlFileV1(filePath);
                     break;
+
                 case TSFileTypes.FileTypeDat:
                     TextHolderProcessService.LoadFromDat(filePath);
                     break;
+
                 default:
                     throw new ArgumentOutOfRangeException(nameof(fileType), fileType, null);
             }
         }
-
 
         /// <summary>
         /// Saves to file.
@@ -86,9 +93,11 @@ namespace ts.translation
                 case TSFileTypes.FileTypeXmlv1:
                     TextHolderProcessService.SaveToXmlFileV1(filePath);
                     break;
+
                 case TSFileTypes.FileTypeDat:
                     TextHolderProcessService.SaveToDatFile(filePath);
                     break;
+
                 default:
                     throw new ArgumentOutOfRangeException(nameof(fileType), fileType, null);
             }
@@ -118,6 +127,11 @@ namespace ts.translation
         public static IEnumerable<PGLanguage> GetAvailableLanguages()
         {
             return EnumUtility<PGLanguage>.GetValues();
+        }
+
+        public static bool HasText(string key)
+        {
+            return GlobalDataHolder.TextHolder.HasText(key);
         }
     }
 }

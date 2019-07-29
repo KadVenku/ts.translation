@@ -2,7 +2,7 @@
 
 namespace ts.translation.data.holder.observables
 {
-    class ObservableTranslationDataSet : ObservableCollection<ObservableTranslationData>
+    internal class ObservableTranslationDataSet : ObservableCollection<ObservableTranslationData>
     {
     }
 }

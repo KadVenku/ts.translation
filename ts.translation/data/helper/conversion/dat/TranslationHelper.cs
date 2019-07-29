@@ -14,14 +14,17 @@ namespace ts.translation.data.helper.conversion.dat
             Crc32 = crc32;
             Value = value.Replace("\0", string.Empty);
         }
+
         public int CompareTo(object obj)
         {
             switch (obj)
             {
                 case null:
                     return 1;
+
                 case TranslationHelper otherTranslation:
                     return Crc32.CompareTo(otherTranslation.Crc32);
+
                 default:
                     throw new ArgumentException($"{obj.GetType()} is not {typeof(TranslationHelper)}");
             }

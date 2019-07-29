@@ -20,8 +20,12 @@ namespace ts.translation.services.holder
                 data = svc.Read(filePath);
             }
 
-            if (data == null) return;
-            if (GlobalDataHolder.TextHolder== null)
+            if (data == null)
+            {
+                return;
+            }
+
+            if (GlobalDataHolder.TextHolder == null)
             {
                 GlobalDataHolder.TextHolder = new TextHolder(data);
             }
@@ -39,7 +43,11 @@ namespace ts.translation.services.holder
                 data = PGDatTypeUtility.Convert(svc.Read(filePath));
             }
 
-            if (data == null) return;
+            if (data == null)
+            {
+                return;
+            }
+
             if (GlobalDataHolder.TextHolder == null)
             {
                 GlobalDataHolder.TextHolder = new TextHolder(data);
@@ -54,7 +62,11 @@ namespace ts.translation.services.holder
         {
             using (TranslationManifestWriter svc = new TranslationManifestWriter())
             {
-                if (GlobalDataHolder.TextHolder == null) return;
+                if (GlobalDataHolder.TextHolder == null)
+                {
+                    return;
+                }
+
                 svc.Write(filePath, GlobalDataHolder.TextHolder.ToLocalisationData());
             }
         }

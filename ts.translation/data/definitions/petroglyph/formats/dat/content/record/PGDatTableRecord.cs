@@ -4,7 +4,7 @@ using ts.translation.data.definitions.petroglyph.formats.dat.content.record.valu
 
 namespace ts.translation.data.definitions.petroglyph.formats.dat.content.record
 {
-    class PGDatTableRecord
+    internal class PGDatTableRecord
     {
         private DatKeyRecordHolder _datKey;
         private DatValueRecordHolder _datValue;

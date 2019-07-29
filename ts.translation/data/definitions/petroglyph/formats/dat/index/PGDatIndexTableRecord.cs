@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ts.translation.data.definitions.petroglyph.formats.dat.index
 {
-    class PGDatIndexTableRecord : IPGBinary
+    internal class PGDatIndexTableRecord : IPGBinary
     {
         private uint _crc32Checksum;
         private uint _keyStringLength;
@@ -67,7 +67,6 @@ namespace ts.translation.data.definitions.petroglyph.formats.dat.index
             index.AddRange(BitConverter.GetBytes(GetValueStringLength()));
             index.AddRange(BitConverter.GetBytes(GetKeyStringLength()));
             return index.ToArray();
-
         }
     }
 }

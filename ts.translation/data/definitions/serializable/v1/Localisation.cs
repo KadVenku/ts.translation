@@ -7,6 +7,7 @@ namespace ts.translation.data.definitions.serializable.v1
     {
         [XmlElement(ElementName = "TranslationData")]
         public TranslationData TranslationData { get; set; }
+
         [XmlAttribute(AttributeName = "Key")]
         public string Key { get; set; }
 

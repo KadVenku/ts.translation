@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 namespace ts.translation.data.definitions.petroglyph.formats.dat.content.record.value
@@ -8,6 +6,7 @@ namespace ts.translation.data.definitions.petroglyph.formats.dat.content.record.
     internal class DatValueRecordHolder : APGDatTableRecordHolder
     {
         private string _translation;
+        internal static readonly Encoding ENCODING = Encoding.Unicode;
 
         internal string GetTranslation()
         {
@@ -31,7 +30,7 @@ namespace ts.translation.data.definitions.petroglyph.formats.dat.content.record.
 
         internal DatValueRecordHolder(byte[] bytes, long index, long stringLength)
         {
-            char[] chars = Encoding.UTF7.GetChars(bytes, Convert.ToInt32(index), Convert.ToInt32(stringLength*2));
+            char[] chars = ENCODING.GetChars(bytes, Convert.ToInt32(index), Convert.ToInt32(stringLength * 2));
             string finalString = new string(chars);
             finalString = finalString.Replace("\0", string.Empty);
             SetTranslation(finalString);
@@ -39,14 +38,7 @@ namespace ts.translation.data.definitions.petroglyph.formats.dat.content.record.
 
         public override byte[] ToBytes()
         {
-            List<byte> valueBytes = new List<byte>();
-            foreach (char character in GetTranslation())
-            {
-                valueBytes.AddRange(BitConverter.GetBytes(character));
-            }
-            return valueBytes.ToArray();
+            return ENCODING.GetBytes(GetTranslation());
         }
-
-
     }
 }

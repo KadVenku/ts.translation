@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 
 namespace ts.translation.common.exceptions
 {
-    class ByteStreamCorruptedException : Exception
+    internal class ByteStreamCorruptedException : Exception
     {
         public ByteStreamCorruptedException()
         {
